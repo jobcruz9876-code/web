@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituto Franklin Delano Roosevelt</title>
+  <style>
+    /* ====== RESET ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* ====== NAV ====== */
+    header {
+      background: #004080;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header nav a {
+      color: #fff;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    header nav a:hover {
+      color: #ffcc00;
+    }
+
+    /* ====== SECCIONES ====== */
+    section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+    .section-title {
+      font-size: 2rem;
+      color: #004080;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #ffcc00;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ====== INICIO ====== */
+    #inicio {
+      background: url("https://via.placeholder.com/1200x500.png?text=Instituto+Roosevelt") no-repeat center/cover;
+      color: white;
+      padding: 100px 20px;
+    }
+    #inicio .hero-content {
+      background: rgba(0,0,0,0.6);
+      display: inline-block;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    #inicio p {
+      margin-top: 10px;
+    }
+
+    /* ====== HISTORIA ====== */
+    #historia p {
+      margin-bottom: 25px;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .history-grid img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .history-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ====== EVENTOS ====== */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .events-grid img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .events-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ====== NOTICIAS ====== */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .news-item {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    /* ====== CURSOS ====== */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .course-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* ====== CONTACTO ====== */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 500px;
+      margin: auto;
+    }
+    form input, form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    form button {
+      padding: 12px;
+      background: #004080;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #003366;
+    }
+
+    /* ====== PROMOCIÓN ====== */
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      perspective: 1000px;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+    .card-front {
+      background: #fff;
+    }
+    .card-front img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .card-back {
+      background: #004080;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    /* ====== RESPONSIVE EXTRA ====== */
+    @media (max-width: 768px) {
+      header nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      #inicio {
+        padding: 60px 15px;
+      }
+      .card-inner {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#historia">Historia</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#noticias">Noticias</a>
+      <a href="#cursos">Carreras</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#promocion">Promoción 2025</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- INICIO -->
+    <section id="inicio">
+      <div class="hero-content">
+        <h2>Bienvenidos al Instituto Franklin Delano Roosevelt</h2>
+        <p>Más de 30 años formando estudiantes con excelencia académica, disciplina y valores.</p>
+      </div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia">
+      <div class="container">
+        <h2 class="section-title">Nuestra Historia</h2>
+        <p>
+          El Instituto Gubernamental Franklin Delano Roosevelt, ubicado en Puerto Cortés, Honduras, es una institución educativa de gran relevancia en la región. Fundado el 26 de junio de 1945 mediante el Acuerdo No. 1030 del Poder Ejecutivo, su creación fue impulsada por la Asociación de Padres de Familia de Puerto Cortés, con el objetivo de ofrecer educación media a los jóvenes de la ciudad.Inicialmente, el instituto funcionó como una entidad privada. En 1965, adquirió carácter semioficial al recibir subvenciones del Estado. Para 1980, su sostenimiento fue compartido entre el Estado, la Empresa Nacional Portuaria, la Refinería Texaco y las fuerzas vivas del puerto. Finalmente, en 1981, el Estado asumió completamente la responsabilidad del pago de salarios al personal, convirtiéndolo en un centro educativo oficial.
+          El primer director fue el Profesor Rubén Alvarado Peña, nombrado oficialmente mediante el Acuerdo No. 1030 del Poder Ejecutivo. El Instituto ofrecía estudios para optar a los títulos de Bachiller en Ciencias y Letras, Maestro en Enseñanza Primaria Urbana, y Perito Mercantil y Contador Público.
+          En sus primeros años, el Instituto operó como una entidad privada. En 1965, adquirió carácter semioficial al recibir subvenciones del Estado. Finalmente, en 1981, se convirtió en un centro educativo oficial, tras una lucha social significativa que incluyó huelgas y movilizaciones por parte del personal, estudiantes, padres de familia y la comunidad en general.
+
+        </p>
+        <p>
+          A lo largo de los años, hemos visto generaciones de estudiantes graduarse y convertirse en profesionales destacados, 
+          aportando al desarrollo de Honduras. Nuestra historia es un testimonio de compromiso, esfuerzo y superación constante.
+          Desde su fundación, el instituto ha ofrecido diversas modalidades educativas, incluyendo Bachillerato en Ciencias y Letras, Maestro de Enseñanza Primaria Urbana, Perito Mercantil y Contador Público, y Secretaria Comercial. Estas opciones han permitido a los estudiantes prepararse para estudios superiores o integrarse al mercado laboral con una formación sólida.
+          El FDR es una institución educativa de carácter oficial, reconocida en Puerto Cortés por su trayectoria académica, excelencia educativa y compromiso con la formación integral de jóvenes hondureños. Actualmente ofrece educación media y diversificada
+          El instituto cuenta con personal docente capacitado, espacios adecuados para el aprendizaje (laboratorios, aulas digitales, biblioteca), y promueve valores como la responsabilidad, respeto, liderazgo y trabajo en equipo.
+          Además, mantiene una participación activa en actividades culturales, científicas, deportivas y de proyección social, fortaleciendo el vínculo entre la educación y la comunidad.
+
+        </p>
+        <div class="history-grid">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.C2frIkvBPmf46iNmklZLogHaHY?pid=Api&P=0&h=220" alt="Historia 1">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.4krTLhSGmN5RDza_f2pBvAHaEg?pid=Api&P=0&h=220" alt="Historia 2">
+          <img src="https://tse3.mm.bing.net/th/id/OIP.peDpM2vIPrMZy_3TVS3zKAHaFj?pid=Api&P=0&h=220" alt="Historia 3">
+          <img src="https://tse3.mm.bing.net/th/id/OIP.i-gViUYlUqRWXD7PEiZGCgHaEK?pid=Api&P=0&h=220" alt="Historia 4">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.gDraLy2zIVR4OOTRZw4P0QHaFj?pid=Api&P=0&h=220" alt="Historia 5">
+          <img src="https://tse3.mm.bing.net/th/id/OIP.fmeoxEkuLvvXUemPr3-lcgHaFj?pid=Api&P=0&h=220" alt="Historia 6">
+          <img src="https://userscontent2.emaze.com/images/b9846e99-b76c-4f5f-8131-7bdc44109374/8852be4236d12372a4eddc0a7b729928.png" alt="Historia 7">
+          <img src="https://tse4.mm.bing.net/th/id/OIP._jNgZmX4hHkqqvjmTafVMQHaFj?pid=Api&P=0&h=220" alt="Historia 8">
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos">
+      <div class="container">
+        <h2 class="section-title">Eventos</h2>
+        <p>
+          Cada año celebramos actividades deportivas, culturales y académicas que fortalecen la unión de nuestra comunidad educativa.
+        </p>
+        <div class="events-grid">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.TnXuztU9XjE4nH_m3Duv7QHaEK?pid=Api&P=0&h=220" alt="Evento 1">
+          <img src="https://tse3.mm.bing.net/th/id/OIP.U6iF8qTaJerpHOnoT27RRQHaD6?pid=Api&P=0&h=220" alt="Evento 2">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.c7od0z9AKIdbbOVP843YwgHaFj?pid=Api&P=0&h=220" alt="Evento 3">
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTICIAS -->
+    <section id="noticias">
+      <div class="container">
+        <h2 class="section-title">Noticias</h2>
+        <p>Últimas novedades del Instituto Franklin Delano Roosevelt.</p>
+        <div class="news-grid">
+          <div class="news-item">
+            <iframe width="100%" height="220" src="https://tse1.mm.bing.net/th/id/OIP.le6i-ESqG1Dgrt9kduXF3AHaJQ?pid=Api&P=0&h=220" frameborder="0" allowfullscreen></iframe>
+            <p>Eleccion de la Señorita 80 Aniversario</p>
+          </div>
+          <div class="news-item">
+            <iframe width="100%" height="220" src="https://tse4.mm.bing.net/th/id/OIP.bAdVERCN0GvBgbvgsnaj5AHaFj?pid=Api&P=0&h=220" frameborder="0" allowfullscreen></iframe>
+            <p>FDR Realiza RUN COLOR Festejando su 80 Anivesasrio</p>
+          </div>
+          <div class="news-item">
+            <iframe width="100%" height="220" src="https://tse2.mm.bing.net/th/id/OIP.3V1HxfRvUYWF5W1MychlrQHaEG?pid=Api&P=0&h=220" frameborder="0" allowfullscreen></iframe>
+            <p>Se Anuncia dia Tpico en el FDR</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURSOS -->
+    <section id="cursos">
+      <div class="container">
+        <h2 class="section-title">Nuestras Carreras</h2>
+        <div class="courses-grid">
+          <div class="course-card">
+            <h3>INFORMÁTICA CON ORIENTACIÓN EN ROBÓTICA</h3>
+            <p>Propuesta educativa moderna que combina los fundamentos de la computación con el desarrollo, programación y control de sistemas automatizados e inteligentes. </p>
+          </div>
+          <div class="course-card">
+            <h3>MARITIMO Y PORTUARIA</h3>
+            <p>Prepara profesionales para llevar el control y análisis de los recursos económicos de una empresa. Se enfoca en la gestión financiera, elaboración de estados contables, toma de decisiones económicas y cumplimiento de obligaciones fiscales.</p>
+          </div>
+          <div class="course-card">
+            <h3>CIENCIAS Y HUMANIDADES</h3>
+            <p>Formación integral que combina el pensamiento crítico, el análisis social y el conocimiento científico. Está orientada a desarrollar habilidades en comunicación, investigación, razonamiento lógico y comprensión de fenómenos sociales, culturales y naturales.
+</p>
+          </div>
+          <div class="course-card">
+            <h3>INFORMÁTICA</h3>
+            <p>Forma profesionales capacitados en el uso, desarrollo y gestión de tecnologías de la información. Está orientada al análisis, diseño y programación de sistemas computacionales que permitan optimizar procesos en distintas áreas laborales.</p>
+          </div>
+          <div class="course-card">
+            <h3>ADMINISTRACION HOTELERA</h3>
+            <p>Forma profesionales capacitados para gestionar, planificar y supervisar operaciones en hoteles, restaurantes y empresas de hospitalidad. Se enfoca en brindar un servicio de calidad, optimizar recursos y garantizar la satisfacción del cliente.</p>
+          </div>
+          <div class="course-card">
+            <h3>CONTADURIA Y FINANZAS</h3>
+            <p>Forma profesionales capaces de gestionar, analizar y controlar los recursos económicos de una organización, tanto en el ámbito público como privado.</p>
+            
+          
+          
+          
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="container">
+        <h2 class="section-title">Contacto</h2>
+        <p>¿Tienes dudas? ¡Estamos para ayudarte!</p>
+        <form>
+          <input type="text" placeholder="Nombre" required>
+          <input type="email" placeholder="Correo" required>
+          <textarea placeholder="Mensaje" rows="5" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PROMOCIÓN -->
+    <section id="promocion">
+      <div class="container">
+        <h2 class="section-title">Promoción 2025</h2>
+        <div class="students-grid" id="students-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Datos de ejemplo para estudiantes
+    const estudiantes = [
+      {id:1,nombre:"ANYELI DARIELA GARCIA RIVAS",imagen:"22.jpg",frase:"El esfuerzo de ayer es el triunfo de hoy."},
+            {id:2,nombre:"ASHLY JUDITH LOPEZ CASTRO",imagen:"16.jpg",frase:"Claro, aquí tienes algunas frases de graduación que puedes usar para discursos, tarjetas o publicaciones:Visualicé el éxito, hoy hago el diseño."},
+            {id:3,nombre:"ASHLEY RACHELL GUARDADO GARCIA",imagen:"6.jpg",frase:"Madre no es la que engendra, es la que valgo."},
+            {id:4,nombre:"ASHLY JARELY RIVERA MEJIA",imagen:"5.jpg",frase:"Lo de llegar tarde fue lo único que dominé bien."},
+            {id:5,nombre:"CECIA JASMIN CASTRO BONILLA",imagen:"17.jpg",frase:"Sé el cambio que quieres ver en el mundo."},
+            {id:6,nombre:"DALYN MARISSA LOPEZ ESCOBAR",imagen:"8.jpg",frase:"Mi verdadera materia extra: Preguntar a ChatGPT."},
+            {id:7,nombre:"ENGEL YORELI HERNANDEZ LOPEZ",imagen:"19.jpg",frase:"Saqué 0, pero brillé de todos modos."},
+            {id:8,nombre:"ERICA VIVIANA MELOS REYES",imagen:".jpg",frase:"Programar no es solo escribir código, es crear soluciones."},
+            {id:9,nombre:"GENESIS HERNANDA CERRATO MARADIAGA",imagen:"31.jpg",frase:"Los grandes logros necesitan tiempo y dedicación."},
+            {id:10,nombre:"JUANY MELISA MEJIA ENAMORADO",imagen:"18.jpg",frase:"Las oportunidades son como el amanecer: si esperas demasiado, las pierdes."},
+            {id:11,nombre:"KAREN NATALIA REYES ALVARADO",imagen:".jpg",frase:"El conocimiento es la mejor herramienta para cambiar el mundo."},
+            {id:12,nombre:"KIMBERLY TATIANA TINOCO MATEO",imagen:"26.jpg",frase:"La perseverancia es la clave del éxito en cualquier ámbito."},
+            {id:13,nombre:"LAURENN AMARILIS OLIVA JIMENEZ",imagen:".jpg",frase:"La informática es el lenguaje universal del futuro."},
+            {id:14,nombre:"MARISSA DAYANARA VELASQUEZ ALVARADO",imagen:".jpg",frase:"Innovar es ver lo que todos han visto, pero pensar lo que nadie ha pensado."},
+            {id:15,nombre:"NATALY RASHELL VARELA RAMIREZ",imagen:"9.jpg",frase:"8 palabras: E-S-T-É-T-I-C-A"},
+            {id:16,nombre:"PAULINA MICHELLE ALMENDARES AMADOR",imagen:"20.jpg",frase:"Si el problema tiene solución, ¿para que te preocupas?, y si no tiene solución , pues ya para que te preocupas."},
+            {id:17,nombre:"TATIANA VERENICE TOLEDO RIOS",imagen:"12.jpg",frase:"Hoy termina una etapa, pero comienza el verdadero camino hacia mis sueños."},
+            {id:18,nombre:"VALERY SINAI MONTOYA HERNANDEZ",imagen:"7.jpg",frase:"Juntos dejamos huellas que durarán para siempre."},
+            {id:19,nombre:"YESLI JASMIN PADILLA RODRIGUEZ",imagen:"4.jpg",frase:"Dios tiene planes de bien para mí."},
+            {id:20,nombre:"ANGEL CALEB POSAS MURILLO",imagen:"13.jpg",frase:"Erase una vez un niño muy guapo como yo que cantaba y ahora es Luis Miguel."},
+            {id:21,nombre:"AXEL MAUDIEL MARTINEZ MARTINEZ",imagen:"10.jpg",frase:"En un lugar de la Mancha, de cuyo nombre no quiero acordarme…"},
+            {id:22,nombre:"EREN ODALDO GUTIERREZ HERNANDEZ",imagen:"30.jpg",frase:"La creatividad es la inteligencia divirtiéndose."},
+            {id:23,nombre:"JAIR ALEXANDER ALVARADO FLORES",imagen:"27.jpg",frase:"La motivación nos impulsa a comenzar, el hábito nos permite continuar."},
+            {id:24,nombre:"JERSON ISAAC MERINO ORDOÑEZ",imagen:"23.jpg",frase:"la mitad del año no hice nada, la otra mitad fue salvarlo."},
+            {id:25,nombre:"JOSE WILFREDO PINEDA FERNANDEZ",imagen:"14.jpg",frase:"La inteligencia casi me alcanza, pero fui más rápido."},
+            {id:26,nombre:"JOSIAS DANIEL CHAVARRIA RODRIGUEZ",imagen:"15.jpg",frase:"Owowowowowowow."},
+            {id:27,nombre:"JOSUE EMANUEL INTERIANO MANN",imagen:"28.jpg",frase:"Cada línea de código nos acerca más al mañana."},
+            {id:28,nombre:"JUAN CARLOS BANEGAS GUARDADO",imagen:"25.jpg",frase:"Si puedes imaginarlo, puedes programarlo."},
+            {id:29,nombre:"KENNY ISAI JIMENEZ RODRIGUEZ",imagen:"3.jpg",frase:"Entre mas alta mas salta y entre mas pequeña mas grita."},
+            {id:30,nombre:"LUIS ADOLFO ULLOA LOPEZ",imagen:"29.jpg",frase:"La tecnología no es nada. Lo importante es que tengas fe en la gente."},
+            {id:31,nombre:"PEDRO ISAI MARTINEZ LOPEZ",imagen:"11.jpg",frase:"Al final no soy especial, soy tonto como todo el mundo..."},
+            {id:32,nombre:"RAMON ARTURO BENITEZ GONZALES",imagen:"24.jpg",frase:"La tecnología no es nada. Lo importante es que tengas fe en la gente."},
+            {id:33,nombre:"VICTOR DAVID CASTRO NUÑEZ",imagen:"21.jpg",frase:"Naci por mi madre morire por mis estudios."},
+            {id:34,nombre:"VICTOR NOE RUBIO RODAS",imagen:"2.jpg",frase:"Si el código no arranca...no hay nada que hacer."}
+    ];
+
+    const grid = document.getElementById("students-grid");
+
+    estudiantes.forEach(est => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      const imgSrc = est.imagen && est.imagen !== ".jpg" ? `imagenes/${est.imagen}` : "imagenes/default.jpg";
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="${imgSrc}" alt="${est.nombre}">
+            <h3>${est.nombre}</h3>
+          </div>
+          <div class="card-back">
+            <p>"${est.frase}"</p>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
